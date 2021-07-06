@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="tagify.css" rel="stylesheet">
+    <style>
+      	span {cursor:pointer; }
+		.number{
+			margin:100px;
+		}
+		.minus, .plus{
+			width:40px;
+			height:40px;
+			background:#f2f2f2;
+			border-radius:4px;
+			padding:8px 5px 8px 5px;
+			border:1px solid #ddd;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+		}
+		input{
+			height:34px;
+      width: 100px;
+      text-align: center;
+      font-size: 26px;
+			border:1px solid #ddd;
+			border-radius:4px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .tagify{
+      --tag-bg: transparent !important;
+      --tags-disabled-bg: transparent !important;
+      --tag-text-color: white;
+   --tag-text-color--edit:white;
+    --tag--min-width: 150px;
+    --tag--max-width: auto;
+    --tag-hover: transparent !important;
+    --tags-hover-border-color: transparent !important;
+    --tags-focus-border-color: transparent !important;
+    --tag-remove-btn-bg--hover: transparent !important;
+    --tag-remove-btn-color: white;
+    --tag-remove-bg: transparent !important; 
+    }
+
+    .tagify__tag
+    {
+       
+      background: url("matvv.jpg") !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% !important;
+      height: 150px !important;
+      text-align: center;
+      font-size: 22px;
+      padding-top: 70px;
+      padding-bottom: 0 !important;
+    
+      
+    }
+    </style>
+
+
+  
+  </head>
+  <body>
+
+    <div class="number">
+      <span class="minus">-</span>
+      <input id="number_box" type="text" value="1"/>
+      <span class="plus">+</span>
+    </div>
+
+    <div style="margin-left: 1vw; max-width: 98vw !important; margin-right: 1vw;">
+        <input name="tags" placeholder="write some tags" id="tag_id" value="" >
+        <br>
+        <button type="button" id="next" class="btn btn-primary" onclick="checkfun();">Next</button>
+
+      </div>
+
+  
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="jQuery.tagify.min.js"></script>
+
+    <script>
+          var _tagify =  $('[name=tags]').tagify();
+
+
+          _tagify.on('add',function(e){
+
+          var tag_length =  $(".tagify__tag").length;
+          tag_length +=1;
+          var number_box = parseInt($("#number_box").val());
+
+          if(number_box  < tag_length)
+          {
+
+          _tagify.removeTag(e);
+
+
+          }
+        })
+  </script>
+
+
+<script>
+
+
+$(document).ready(function() {
+			$('.minus').click(function () {
+        
+				var $input = $(this).parent().find('#number_box');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+        
+				return false;
+			});
+
+			$('.plus').click(function () {
+				var $input = $(this).parent().find('#number_box');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+        
+				return false;
+			});
+
+
+      $('#number_box').change(function () {
+				var number_box = parseInt($("#number_box").val());
+				
+				if (number_box<1)
+        {
+          $("#number_box").val(1);
+        }
+			});
+
+      $('#number_box').blur(function () {
+        var number_box = parseInt($("#number_box").val());
+				if (number_box<1)
+        {
+          $("#number_box").val(1);
+        }
+			});
+		});
+</script>
+
+<script>
+  function checkfun()
+  {
+    var tag_length =  $(".tagify__tag").length;
+    var number_box = parseInt($("#number_box").val());
+
+    if(tag_length == number_box)
+    {
+      alert("ok you are in");
+    }
+    else if(tag_length < number_box)
+    {
+      alert("please add "+(number_box-tag_length)+" than click on next");
+    }
+
+  }
+
+
+
+
+
+</script>
+
+
+
+		
+	
+			
+
+</body>
+</html>
